@@ -1,0 +1,62 @@
+.header {
+  background-color: green;
+  margin-bottom: 4px;
+}
+
+.primary-bg-color {
+  background-color: green;
+}
+
+.nav-item {
+  border-bottom: 1px solid green;
+  border-top: 1px solid green;
+  border-right: 1px solid green;
+}
+
+.nav-item a {
+  color: green;
+}
+header {
+  background-color: green;
+}
+
+.nav-item:hover {
+  background-color: green;
+}
+.nav-item:hover a {
+  color: white !important;
+}
+
+.content {
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 15px;
+}
+
+.permissions li {
+  list-style-type: none;
+  border: 1px solid black;
+  text-align: center;
+  padding: 10px;
+  background-color: bisque;
+  cursor: pointer;
+}
+.permissions li:hover {
+  background-color: white;
+}
+
+.bookclassroom form button {
+  background-color: bisque;
+  padding: 10px 40px;
+}
+.bookclassroom .content .tab,
+.checkreservation .content .tab {
+  background-color: bisque;
+  margin: 0 10px;
+  cursor: pointer;
+}
+.bookclassroom .content .tab:hover,
+.checkreservation .content .tab:hover {
+  background-color: bisque;
+  color: white;
+}
