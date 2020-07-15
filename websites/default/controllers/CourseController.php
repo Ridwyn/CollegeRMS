@@ -29,6 +29,8 @@ class CourseController {
       'title' => 'course list',
       'variables'=>['course'=>$course,'modules'=>$modules,'teacher'=>$teacher],
       ];
+
+   
  }
 
 ////////////////////////////

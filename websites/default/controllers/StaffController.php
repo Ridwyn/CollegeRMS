@@ -56,8 +56,7 @@ class StaffController {
       $this->adminTable->save($staff);
    }
    
-   // array_push( $this->staffs,$staff);
-   // var_dump($this->staffs);
+
    
    header('location: /staff/list');
 }
@@ -65,7 +64,6 @@ class StaffController {
 public function editForm(){
    $staff=null;
    if (isset($_GET['id'])) {
-         
 
       if($_GET['staff']=="teacher"){
          $teacher = $this->teacherTable->findByID($_GET['id']);

@@ -892,8 +892,7 @@ CREATE TABLE `attendance` (
   `attendance_id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
   `module_id` int(11) NOT NULL,
-  `percentage` decimal(10,0) NOT NULL,
-  `attendance_date` date NOT NULL,
+  `percentage` decimal(5,2) NOT NULL,
   PRIMARY KEY (`attendance_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -917,10 +916,9 @@ DROP TABLE IF EXISTS `courses`;
 CREATE TABLE `courses` (
   `course_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `leader` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `staff_id` int(11) NOT NULL,
   `no_of_modules` int(11) NOT NULL,
   `course_duration` int(11) NOT NULL,
-  `teacher_id` int(11) NOT NULL,
   PRIMARY KEY (`course_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -931,7 +929,7 @@ CREATE TABLE `courses` (
 
 LOCK TABLES `courses` WRITE;
 /*!40000 ALTER TABLE `courses` DISABLE KEYS */;
-INSERT INTO `courses` VALUES (1,'Computing','Dean',4,2,1),(18,'Acting 2','',0,1,2);
+INSERT INTO `courses` VALUES (1,'Computing',0,4,2),(3,'Business',0,2,3),(18,'Acting 2',0,0,1);
 /*!40000 ALTER TABLE `courses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -964,6 +962,31 @@ INSERT INTO `courses_archive` VALUES (3,'Business','Mary',2,3,1);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `grade`
+--
+
+DROP TABLE IF EXISTS `grade`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `grade` (
+  `grade_id` int(11) NOT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  `module_id` int(11) DEFAULT NULL,
+  `grade` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`grade_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `grade`
+--
+
+LOCK TABLES `grade` WRITE;
+/*!40000 ALTER TABLE `grade` DISABLE KEYS */;
+/*!40000 ALTER TABLE `grade` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `module`
 --
 
@@ -985,7 +1008,7 @@ CREATE TABLE `module` (
 
 LOCK TABLES `module` WRITE;
 /*!40000 ALTER TABLE `module` DISABLE KEYS */;
-INSERT INTO `module` VALUES (1,'m1',18,0),(2,'m2',18,0),(3,'m3',18,0),(4,'m4',18,0),(5,'m5',18,0);
+INSERT INTO `module` VALUES (0,'a',18,0),(2,'asdd',18,0),(3,'fw',18,0),(4,'asdd',18,0);
 /*!40000 ALTER TABLE `module` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -997,12 +1020,13 @@ DROP TABLE IF EXISTS `reservation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reservation` (
+  `reservation_id` int(11) NOT NULL,
   `room_id` int(11) NOT NULL,
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
-  `reservation_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` int(11) DEFAULT NULL,
   PRIMARY KEY (`reservation_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1011,7 +1035,7 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-INSERT INTO `reservation` VALUES (1,'2020-05-22 02:17:00','2020-05-29 07:17:00',1),(2,'2020-05-21 06:28:00','2020-05-29 06:29:00',2),(4,'2020-05-30 07:32:00','2020-05-29 07:32:00',3),(1,'2020-05-30 07:01:00','2020-05-21 13:02:00',4),(1,'2020-05-30 07:01:00','2020-05-21 13:02:00',5),(1,'2020-06-01 00:00:00','2020-06-01 00:00:00',6),(1,'2020-06-01 00:00:00','2020-06-01 00:00:00',7),(1,'2020-06-01 00:00:00','2020-06-01 00:00:00',8),(1,'2020-06-01 00:00:00','2020-06-01 00:00:00',9),(1,'2020-06-01 00:00:00','2020-06-01 00:00:00',10),(1,'2020-06-01 21:29:00','2020-06-01 00:22:00',11);
+INSERT INTO `reservation` VALUES (1,1,'2020-05-22 02:17:00','2020-05-29 07:17:00',NULL),(2,2,'2020-05-21 06:28:00','2020-05-29 06:29:00',NULL),(3,4,'2020-05-30 07:32:00','2020-05-29 07:32:00',NULL),(4,1,'2020-05-30 07:01:00','2020-05-21 13:02:00',NULL),(5,1,'2020-05-30 07:01:00','2020-05-21 13:02:00',NULL),(6,1,'2020-06-01 00:00:00','2020-06-01 00:00:00',NULL),(7,1,'2020-06-01 00:00:00','2020-06-01 00:00:00',NULL),(8,1,'2020-06-01 00:00:00','2020-06-01 00:00:00',NULL),(9,1,'2020-06-01 00:00:00','2020-06-01 00:00:00',NULL),(10,1,'2020-06-01 00:00:00','2020-06-01 00:00:00',NULL),(11,1,'2020-06-01 21:29:00','2020-06-01 00:22:00',NULL);
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1041,6 +1065,39 @@ INSERT INTO `room` VALUES (1,'creative hub','cb1'),(2,'learning hub','lh1'),(3,'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `staff`
+--
+
+DROP TABLE IF EXISTS `staff`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `staff` (
+  `staff_id` int(11) NOT NULL AUTO_INCREMENT,
+  `Fname` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Sname` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dob` date NOT NULL,
+  `gender` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_no` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `start_date` date NOT NULL,
+  `postcode` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `street` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `salary` decimal(8,2) NOT NULL,
+  PRIMARY KEY (`staff_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `staff`
+--
+
+LOCK TABLES `staff` WRITE;
+/*!40000 ALTER TABLE `staff` DISABLE KEYS */;
+/*!40000 ALTER TABLE `staff` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `student`
 --
 
@@ -1052,8 +1109,6 @@ CREATE TABLE `student` (
   `Fname` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Sname` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `DOB` date NOT NULL,
-  `username` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `contact_no` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1062,7 +1117,7 @@ CREATE TABLE `student` (
   `est_grad_date` date NOT NULL,
   `course_id` int(11) NOT NULL,
   PRIMARY KEY (`student_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1071,7 +1126,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (5,'dame','lillard','2000-10-11','damedolla','1','','','','2020-06-11','','0000-00-00',0);
+INSERT INTO `student` VALUES (5,'dame','lillard','2000-10-11','','','','2020-06-11','','0000-00-00',0),(9,'as','','0000-00-00','','','','0000-00-00','','0000-00-00',0),(10,'abcfdc','Idrissou','2020-07-09','95 Kingsland Court','','07465043112','2020-07-03','','2020-07-09',0);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1180,6 +1235,32 @@ LOCK TABLES `teacher_archive` WRITE;
 /*!40000 ALTER TABLE `teacher_archive` DISABLE KEYS */;
 /*!40000 ALTER TABLE `teacher_archive` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_type` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (2,'9-student','Ys1rK','student'),(3,'10-student','ySQLu','student');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1190,4 +1271,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-11 19:48:33
+-- Dump completed on 2020-07-16  0:37:20

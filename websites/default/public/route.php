@@ -23,13 +23,17 @@ class Routes {
     require '../controllers/RoomController.php';
     require '../controllers/DashboardController.php';
     require '../controllers/SearchController.php';
+
+    $usertable= new \Database\DatabaseTable($pdo, 'users', 'user_id');
    
     $teacherTable = new \Database\DatabaseTable($pdo, 'teacher', 'teacher_id');
     $adminTable = new \Database\DatabaseTable($pdo, 'admin', 'admin_id');
-    $staffController = new \Controller\StaffController($teacherTable,$adminTable);
+    $staffTable = new \Database\DatabaseTable($pdo, 'staff', 'staff_id');
+
+    $staffController = new \Controller\StaffController($teacherTable,$adminTable,$usertable);
    
     $studentsTable = new \Database\DatabaseTable($pdo, 'student', 'student_id');
-    $studentController = new \Controller\StudentController($studentsTable);
+    $studentController = new \Controller\StudentController($studentsTable,$usertable);
 
     $courseTable = new \Database\DatabaseTable($pdo, 'courses', 'course_id');
     $moduleTable = new \Database\DatabaseTable($pdo, 'module', 'module_id');
@@ -42,7 +46,7 @@ class Routes {
     $roomController = new \Controller\RoomController($roomTable);
 
     $dashboardController = new \Controller\DashboardController($courseTable,$studentsTable,$roomTable);
-    $searchController = new \Controller\SearchController($courseTable,$studentsTable,$teacherTable,$adminTable);
+    $searchController = new \Controller\SearchController($courseTable,$studentsTable,$staffTable);
      $routes= [
         '' => [
             'GET' => [

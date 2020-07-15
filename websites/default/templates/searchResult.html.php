@@ -2,31 +2,18 @@
 <ul class="list-group">
     <?php
     echo '<h4>Search results for <b>"'.$searchterm.'"</b></h4>';
-    if(count($results['courses'])+ count($results['teachers']) + count($results['admins']) + count($results['students'])==0 ){
+    if(count($results['courses'])+ count($results['staffs']) + count($results['students'])==0 ){
         echo '<h5 class="font-weight-bolder text-center">No Results found</h5>';
     }
-    
 
-        if(count($results['teachers']) != 0){
-            echo '<h5 class="list-group-item font-weight-bolder text-center"> Teachers   </h5>';
-            foreach($results['teachers'] as $teacher){
+        if(count($results['staffs']) != 0){
+            echo '<br><h5 class="list-group-item font-weight-bolder text-center"> Staffs   </h5>';
+            foreach($results['staffs'] as $staff){
+                
                 echo '<li class="list-group-item">
-                        <a href="/staff?id='.$teacher['teacher_id'].'&staff=teacher">
-                        <span>'.$teacher["Fname"].'</span>
-                        <span>'.$teacher["Sname"].'</span>
-                        </a>
-                    </li>';
-            
-            }
-        }  
-        
-        if(count($results['admins']) != 0){
-            echo '<br><h5 class="list-group-item font-weight-bolder text-center"> Admins   </h5>';
-            foreach($results['admins'] as $admin){
-                echo '<li class="list-group-item">
-                        <a href="/staff?id='.$admin['admin_id'].'&staff=admin">
-                        <span>'.$admin["Fname"].'</span>
-                        <span>'.$admin["Sname"].'</span>
+                        <a href="/staff?id='.$staff['staff_id'].'">
+                        <span>'.$staff["Fname"].'</span>
+                        <span>'.$staff["Sname"].'</span>
                         </a>
                     </li>';
             

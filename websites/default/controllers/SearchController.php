@@ -3,16 +3,14 @@ namespace Controller;
 class SearchController {
  private $courseTable;
  private $studentTable;
- private $teacherTable;
- private $adminTable;
+ private $staffTable;
 
 
 
- public function __construct($courseTable,$studentTable,$teacherTable,$adminTable) {
+ public function __construct($courseTable,$studentTable,$staffTable) {
  $this->courseTable = $courseTable;
  $this->studentTable = $studentTable;
- $this->teacherTable = $teacherTable;
- $this->adminTable = $adminTable;
+ $this->staffTable = $staffTable;
  
  }
 
@@ -45,7 +43,7 @@ class SearchController {
     $students = $this->studentTable->findAll();
     $found=[];
     foreach($students as $index => $student) { 
-        $studentString= strtolower(trim($student['Fname'].$student['Sname'].$student['username'].$student['email']));
+        $studentString= strtolower(trim($student['Fname'].$student['Sname'].$student['email']));
         
         if(strpos($studentString,$searchString) !== false){
             array_push($found,$student);
@@ -53,26 +51,15 @@ class SearchController {
     }
     return $found;
  }
- public function matchedTeachers($searchString){
-    $teachers = $this->teacherTable->findAll();
+
+ public function matchedStaffs($searchString){
+    $staffs = $this->staffTable->findAll();
     $found=[];
-    foreach($teachers as $index => $teacher) { 
-        $teacherString= strtolower(trim($teacher['Fname'].$teacher['Sname'].$teacher['username'].$teacher['email']));
+    foreach($staffs as $index => $staff) { 
+        $staffString= strtolower(trim($staff['Fname'].$staff['Sname'].$staff['email']));
         
-        if(strpos($teacherString,$searchString) !== false){
-            array_push($found,$teacher);
-        }
-    }
-    return $found;
- }
- public function matchedAdmins($searchString){
-    $admins = $this->adminTable->findAll();
-    $found=[];
-    foreach($admins as $index => $admin) { 
-        $adminString= strtolower(trim($admin['Fname'].$admin['Sname'].$admin['username']));
-        
-        if(strpos($adminString,$searchString) !== false){
-            array_push($found,$admin);
+        if(strpos($staffString,$searchString) !== false){
+            array_push($found,$staff);
         }
     }
     return $found;
@@ -84,9 +71,8 @@ class SearchController {
    $searchString =strtolower(trim($_POST['searchterm']));
   $courses =$this->matchedCourses($searchString);
   $students =$this->matchedStudents($searchString);
-  $teachers =$this->matchedTeachers($searchString);
-  $admins =$this->matchedAdmins($searchString);
-  $results=['courses'=>$courses,'students'=>$students,'teachers'=>$teachers,'admins'=>$admins];
+  $staffs =$this->matchedStaffs($searchString);
+  $results=['courses'=>$courses,'students'=>$students,'staffs'=>$staffs];
 
    return[
     'template'=>'searchResult.html.php',
