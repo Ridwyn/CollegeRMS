@@ -1,6 +1,6 @@
 <?php
-namespace Controller;
-class DashboardController {
+namespace Classes\Controllers;
+class Dashboard {
  private $courseTable;
  private $studentTable;
  private $roomTable;

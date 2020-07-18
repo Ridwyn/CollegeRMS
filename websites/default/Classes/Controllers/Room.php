@@ -1,6 +1,6 @@
 <?php
-namespace Controller;
-class RoomController {
+namespace Classes\Controllers;
+class Room {
  private $roomTable;
  public function __construct($roomTable) {
  $this->roomTable = $roomTable;

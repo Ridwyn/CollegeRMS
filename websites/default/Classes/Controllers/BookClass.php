@@ -1,6 +1,6 @@
 <?php
-namespace Controller;
-class BookClassController {
+namespace Classes\Controllers;
+class BookClass {
  private $roomTable;
  private $reservationTable;
 

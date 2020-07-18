@@ -1,6 +1,6 @@
 <?php
-namespace Controller;
-class SearchController {
+namespace Classes\Controllers;
+class Search  {
  private $courseTable;
  private $studentTable;
  private $staffTable;

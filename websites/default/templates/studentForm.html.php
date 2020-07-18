@@ -1,33 +1,39 @@
 <form action="" method="post">
 	<input type="hidden" name="student[student_id]" value="<?=$student['student_id'] ?? ''?>" />
-	<label for="joketext">Student Firstname</label>
+	<label for="student[Fname]">Firstname</label>
     <input type="text" name="student[Fname]" value="<?=$student['Fname'] ?? ''?>" />
 	</br>
-	<label for="joketext">Student Last</label>
+	<label for="student[Mname]">Middlename</label>
+    <input type="text" name="student[Mname]" value="<?=$student['Mname'] ?? ''?>" />
+	</br>
+	<label for="student[Sname]">Surname</label>
     <input type="text" name="student[Sname]" value="<?=$student['Sname'] ?? ''?>" />
 	</br>
-	<label for="joketext">DOB</label>
+	<label for="student[DOB]">DOB</label>
 	<input type="date" name="student[DOB]" value="<?=$student['DOB'] ?? ''?>">
 	</br>
-	<!-- <label for="joketext">username</label>
-    <input type="text" name="student[username]" value="<?=$student['username'] ?? ''?>" />
-	</br>
-	<label for="joketext">password</label>
-    <input type="password" name="student[password]" value="<?=$student['password'] ?? ''?>" /> -->
-	</br>
-	<label for="joketext">Start date</label>
+	<label for="student[start_date]">Start date</label>
 	<input type="date" name="student[start_date]" value="<?=$student['start_date'] ?? ''?>">
 	</br>
-	<label for="joketext">Estimate gradudate date</label>
+	<label for="student[est_grad_date]">Estimate gradudate date</label>
 	<input type="date" name="student[est_grad_date]" value="<?=$student['est_grad_date'] ?? ''?>">
 	</br>
+	<label for="student[postcode]">Postcode</label>
+    <input type="text" name="student[postcode]" value="<?=$student['postcode'] ?? ''?>" />
 	</br>
-	<label for="joketext">address</label>
-    <input type="text" name="student[address]" value="<?=$student['address'] ?? ''?>" />
+	<label for="student[street]">Street</label>
+    <input type="text" name="student[street]" value="<?=$student['street'] ?? ''?>" />
 	</br>
-	<label for="joketext">Telephone</label>
+	<label for="student[city]">City</label>
+    <input type="text" name="student[city]" value="<?=$student['city'] ?? ''?>" />
+	</br>
+	<label for="student[contact_no]">Contact Number</label>
     <input type="number" name="student[contact_no]" value="<?=$student['contact_no'] ?? ''?>" />
 	</br>
+	<label for="student[email]">Email</label>
+    <input type="text" name="student[email]" value="<?=$student['email'] ?? ''?>" />
+	</br>
+		
 		
 		
 	<input type="submit" value="Add">

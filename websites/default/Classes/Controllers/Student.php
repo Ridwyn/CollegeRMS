@@ -1,11 +1,12 @@
 <?php
-namespace Controller;
-class StudentController {
+namespace Classes\Controllers;
+class Student {
  private $studentTable;
  private $usertable;
- public function __construct($studentTable,$usertable) {
+ public function __construct($studentTable,$usertable,$courseTable) {
  $this->studentTable = $studentTable;
  $this->usertable = $usertable;
+ $this->courseTable = $courseTable;
  }
  public function list() {
     $students = $this->studentTable->findAll();
@@ -36,7 +37,12 @@ class StudentController {
    if(!$userFound){
       $this->usertable->insert($data);
    }
+   if($_SESSION['usertype']=='admin'){
    header('location: /student/list');
+   }
+   else {
+      header('location: /student?id='.$_SESSION['id']);
+   }
 }
 
 public function randomPassword() {
@@ -84,4 +90,33 @@ public function editForm(){
    $this->studentTable->archive($_GET['id']);
    header('location: /student/list');
  }
+
+
+ public function enrollmentForm(){
+   $student=null;
+   $courses= $this->courseTable->findAll();
+
+      $student = $this->studentTable->findByID($_GET['id'])[0];
+
+   return [
+      'template' => 'enrollmentForm.html.php',
+      'variables' => ['student' => $student, 'courses' => $courses],
+      'title' => 'Enrollment' 
+   ];
+  
+
+}
+ public function enrollmentSubmit(){
+   $student = $_POST['student'];
+   $courseName=$this->courseTable->findByID($_POST['student']['course_id'])[0]['name'];
+   $student['course']= $courseName;
+  $student_id= $this->studentTable->save($student)?? $_POST['student']['student_id'];    
+   header('location: /student?id='.$student_id.'');
+}
+
+
+
+
+
+
 }

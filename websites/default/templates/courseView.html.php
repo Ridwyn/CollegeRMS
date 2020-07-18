@@ -5,10 +5,8 @@
             <table class="table table-hover my-3">
               <thead>
                 <tr>
-                  <!-- <th scope="col">Title</th> -->
-                  <!-- <th scope="col">Contents</th> -->
                   <th scope="col">Tutor</th>
-                  <th scope="col">Total Modules</th>
+                  <th scope="col">Number of Modules</th>
                   <th scope="col">duration</th>
                   <th scope="col">Module List</th>
                 </tr>
@@ -16,18 +14,19 @@
               <tbody>
                 <tr>
                   <td><?= $teacher['Fname']?? ''?></td>
-                  <td><?= $course['no_of_modules'] ?? ''?></td>
+                  <td><?= count($modules)?? ''?></td>
                   <td><?= $course['course_duration'] ?? ''?></td>
                   <td>
                     <?php
                       foreach($modules as $module){
                       echo '             
                             <li class="list-group-item">
-                              '.$module['name'].'
-                              <span></span>
+                             <a href="/module?id='.$module['module_id'].'"> '.$module['name'].'</a>
                             </li>';
                         }
                     ?>
+                    </br>
+                    <?php echo'<a href="/module/edit?course_id='.$course['course_id'].'" class="btn btn-primary">Add Module</a>'?>
                 </td>
                 </tr>
               </tbody>

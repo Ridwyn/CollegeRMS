@@ -827,58 +827,29 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `wuc` /*!40100 DEFAULT CHARACTER SET ut
 USE `wuc`;
 
 --
--- Table structure for table `admin`
+-- Table structure for table `announcements`
 --
 
-DROP TABLE IF EXISTS `admin`;
+DROP TABLE IF EXISTS `announcements`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `admin` (
-  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
-  `designation` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Fname` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Sname` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `username` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `announcements` (
+  `announcement_id` int(11) NOT NULL AUTO_INCREMENT,
+  `subject` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci,
+  `author` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`announcement_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `admin`
+-- Dumping data for table `announcements`
 --
 
-LOCK TABLES `admin` WRITE;
-/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` VALUES (1,'','AD1','ad1','admin1','a'),(2,'','a3','a23','a3','a2');
-/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `admin_archive`
---
-
-DROP TABLE IF EXISTS `admin_archive`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `admin_archive` (
-  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
-  `designation` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Fname` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Sname` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `username` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `admin_archive`
---
-
-LOCK TABLES `admin_archive` WRITE;
-/*!40000 ALTER TABLE `admin_archive` DISABLE KEYS */;
-/*!40000 ALTER TABLE `admin_archive` ENABLE KEYS */;
+LOCK TABLES `announcements` WRITE;
+/*!40000 ALTER TABLE `announcements` DISABLE KEYS */;
+INSERT INTO `announcements` VALUES (1,'Assignment due','  Lorem Ipsum is simply dummy text of the printing and typesetting industry     ','ta ');
+/*!40000 ALTER TABLE `announcements` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -920,7 +891,7 @@ CREATE TABLE `courses` (
   `no_of_modules` int(11) NOT NULL,
   `course_duration` int(11) NOT NULL,
   PRIMARY KEY (`course_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -929,7 +900,7 @@ CREATE TABLE `courses` (
 
 LOCK TABLES `courses` WRITE;
 /*!40000 ALTER TABLE `courses` DISABLE KEYS */;
-INSERT INTO `courses` VALUES (1,'Computing',0,4,2),(3,'Business',0,2,3),(18,'Acting 2',0,0,1);
+INSERT INTO `courses` VALUES (1,'Computing',0,4,2),(3,'Business',0,2,3),(18,'Actin 2',9,0,4),(19,'Engineering',9,0,4);
 /*!40000 ALTER TABLE `courses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -997,7 +968,7 @@ CREATE TABLE `module` (
   `module_id` int(11) NOT NULL,
   `name` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `course_id` int(11) NOT NULL,
-  `teacher_id` int(11) NOT NULL,
+  `staff_id` int(11) NOT NULL,
   PRIMARY KEY (`module_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1008,7 +979,7 @@ CREATE TABLE `module` (
 
 LOCK TABLES `module` WRITE;
 /*!40000 ALTER TABLE `module` DISABLE KEYS */;
-INSERT INTO `module` VALUES (0,'a',18,0),(2,'asdd',18,0),(3,'fw',18,0),(4,'asdd',18,0);
+INSERT INTO `module` VALUES (0,'Mechanical Principles',19,9),(2,'Understanding the Visual ',18,9),(3,'fw',18,0),(4,'asdd',18,0);
 /*!40000 ALTER TABLE `module` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1084,8 +1055,9 @@ CREATE TABLE `staff` (
   `street` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `city` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `salary` decimal(8,2) NOT NULL,
+  `stafftype` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`staff_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1094,6 +1066,7 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
+INSERT INTO `staff` VALUES (8,'ad','','0000-00-00','male','','','0000-00-00','','','',0.00,'admin'),(9,'ta','','0000-00-00','male','','','0000-00-00','','','',0.00,'teacher'),(10,'re','','0000-00-00','male','','','0000-00-00','','','',0.00,'teacher'),(11,'tre','yg','0000-00-00','male','','','0000-00-00','','','',0.00,'teacher');
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1117,7 +1090,7 @@ CREATE TABLE `student` (
   `est_grad_date` date NOT NULL,
   `course_id` int(11) NOT NULL,
   PRIMARY KEY (`student_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1126,7 +1099,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (5,'dame','lillard','2000-10-11','','','','2020-06-11','','0000-00-00',0),(9,'as','','0000-00-00','','','','0000-00-00','','0000-00-00',0),(10,'abcfdc','Idrissou','2020-07-09','95 Kingsland Court','','07465043112','2020-07-03','','2020-07-09',0);
+INSERT INTO `student` VALUES (23,'st','','0000-00-00','','','','0000-00-00','Actin 2','0000-00-00',18);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1166,77 +1139,6 @@ INSERT INTO `student_archive` VALUES (4,'john','doe','1998-09-15','johnd','1',''
 UNLOCK TABLES;
 
 --
--- Table structure for table `teacher`
---
-
-DROP TABLE IF EXISTS `teacher`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `teacher` (
-  `teacher_id` int(11) NOT NULL AUTO_INCREMENT,
-  `Fname` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Sname` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `username` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dob` date NOT NULL,
-  `gender` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `contact_no` int(15) NOT NULL,
-  `email` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `start_date` date NOT NULL,
-  `address` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `course` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `salary` double NOT NULL,
-  `course_id` int(11) NOT NULL,
-  PRIMARY KEY (`teacher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `teacher`
---
-
-LOCK TABLES `teacher` WRITE;
-/*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` VALUES (1,'Dean','mory','dmory','123','2020-06-11','male',0,'dmory@gmail.com','2020-06-27','','',0,0),(2,'john','hon ','jpon','123','2020-06-09','',0,'hon@outlook.ocm','2020-06-03','','',0,0);
-/*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `teacher_archive`
---
-
-DROP TABLE IF EXISTS `teacher_archive`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `teacher_archive` (
-  `teacher_id` int(11) NOT NULL AUTO_INCREMENT,
-  `Fname` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Sname` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `username` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dob` date NOT NULL,
-  `gender` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `contact_no` int(15) NOT NULL,
-  `email` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `start_date` date NOT NULL,
-  `address` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `course` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `salary` double NOT NULL,
-  `course_id` int(11) NOT NULL,
-  PRIMARY KEY (`teacher_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `teacher_archive`
---
-
-LOCK TABLES `teacher_archive` WRITE;
-/*!40000 ALTER TABLE `teacher_archive` DISABLE KEYS */;
-/*!40000 ALTER TABLE `teacher_archive` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `users`
 --
 
@@ -1249,7 +1151,7 @@ CREATE TABLE `users` (
   `password` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_type` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1258,7 +1160,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (2,'9-student','Ys1rK','student'),(3,'10-student','ySQLu','student');
+INSERT INTO `users` VALUES (5,'8-admin','IW7QQ','admin'),(6,'9-teacher','a1sjA','teacher'),(7,'23-student','bcmmW','student'),(8,'10-teacher','dQD46','teacher'),(9,'11-teacher','9wTbJ','teacher');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1271,4 +1173,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-16  0:37:20
+-- Dump completed on 2020-07-18  1:44:30

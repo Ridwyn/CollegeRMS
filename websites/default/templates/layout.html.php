@@ -21,8 +21,18 @@
 				<div class="logo col-4" id="logo" style="height:100px">
 					<img src="/images/logo3.jpeg" style="height: -webkit-fill-available;" alt="">
 				</div>
-				<div class="banner col-8" id="banner">
+				<div class="banner col-6" id="banner">
 					<h3 class="font-weight-bolder py-4">Woodlands University College</h3>
+				</div>
+				<div class="col-2">
+				<?php    
+					if (isset($_SESSION['usertype'])) {
+						echo '<a href="/logout" class="badge badge-danger">logout</a>';
+						echo'<h4>Welcome '.$_SESSION['username'].'</h4>';
+					}else{
+						echo '<a href="/login" class="badge badge-primary">Login</a>';
+					}
+				?>
 				</div>
 			</header>
 
