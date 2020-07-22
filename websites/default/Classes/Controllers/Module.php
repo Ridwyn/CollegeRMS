@@ -11,7 +11,14 @@ class Module {
  $this->courseTable = $courseTable;
  }
 
-
+    public function list() {
+        $modules = $this->moduleTable->find('staff_id',$_SESSION['id']);
+        return[
+            'template'=>'moduleList.html.php',
+            'title' => 'Modules',
+            'variables'=>['modules'=>$modules],
+            ];
+    }
     public function view(){
         $module = $this->moduleTable->findByID($_GET['id'])[0];
         $course = $this->courseTable->findByID($module['course_id'])[0];

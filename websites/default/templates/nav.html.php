@@ -17,6 +17,7 @@ if(isset($_SESSION['usertype'])){
                 </li><li class="nav-item">
                 <h4><a class="nav-link " href="/bookclass/edit">BookClassroom</a></h4>
                 </li><li class="nav-item">
+                </li><li class="nav-item">
                 <h4><a class="nav-link " href="/checkreservation">Check Reservation</a></h4>
                 </li><li class="nav-item">
                 <h4><a class="nav-link " href="">Attendance Records</a></h4>
@@ -36,7 +37,7 @@ if(isset($_SESSION['usertype'])){
                     </li><li class="nav-item">
                     <h4><a class="nav-link " href="/announcement/list">Announcements</a></h4>
                     </li><li class="nav-item">
-                    <h4><a class="nav-link " href="/student/list">Student Records</a></h4>
+                    <h4><a class="nav-link " href="/module/list">Modules</a></h4>
                     </li><li class="nav-item">
                     <h4><a class="nav-link " href="/bookclass/edit">BookClassroom</a></h4>
                     </li><li class="nav-item">

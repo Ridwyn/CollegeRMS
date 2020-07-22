@@ -7,7 +7,7 @@
   <?php
     foreach($courses as $course){
       echo '             
-              <li class="list-group-item">
+              <li class="list-group-item d-flex justify-content-between">
                             <a href="/course?id='.$course['course_id'].'">'.$course["name"].'</a>
                         </li>';
       }

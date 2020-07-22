@@ -11,12 +11,18 @@ if($_SESSION['usertype']=='admin'){
     if($entity=='student'){
         $enrolLink='<li class="col"><a href="/'.$entity.'/enrol?id='.$id.'">Enrol</li>';
     }
+    $lecturePlanLink='';
+    if($entity=='course'){
+
+        $lecturePlanLink='<li class="col"><a href="/lecture/plan?id='.$id.'">View/Plan Lectures</li>';
+    }
 $permission=
 '<ul class="row permissions w-100 justify-content-center my-2">
 <li class="col"> <a href="/'.$entity.'/edit?id='.$id.'">Amend</a></li>
 <li class="col"> <a href="/'.$entity.'/archive?id='.$id.'">Archive</a></li>
 <li class="col"><a href="/'.$entity.'/delete?id='.$id.'">Delete</a></li>
 '.$enrolLink.'
+'. $lecturePlanLink.'
 </ul>';
 }
 elseif($_SESSION['usertype']=='teacher' && $route=='announcement'){

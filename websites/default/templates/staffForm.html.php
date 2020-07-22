@@ -5,6 +5,9 @@
 		<label for="staff[Fname]">First Name</label>
         <input type="text" name="staff[Fname]" value="<?=$staff['Fname'] ?? ''?>" />
 		</br>
+		<label for="staff[Mname]">Middle Name</label>
+        <input type="text" name="staff[Mname]" value="<?=$staff['Mname'] ?? ''?>" />
+		</br>
 		<label for="staff[Sname]">Last Name</label>
         <input type="text" name="staff[Sname]" value="<?=$staff['Sname'] ?? ''?>" />
 		</br>

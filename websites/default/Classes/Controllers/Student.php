@@ -9,13 +9,20 @@ class Student {
  $this->courseTable = $courseTable;
  }
  public function list() {
+    $students=null;
+    if(isset($_GET['id'])){
+    $students = $this->studentTable->find('course_id',$_GET['id']);
+    }
+    else{
     $students = $this->studentTable->findAll();
+    }
      return[
         'template'=>'studentList.html.php',
         'title' => 'student list',
         'variables'=>['students'=>$students],
         ];
  }
+
  public function view(){
    $student = $this->studentTable->findByID($_GET['id'])[0];
    return[

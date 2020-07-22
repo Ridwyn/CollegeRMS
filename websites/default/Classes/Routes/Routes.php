@@ -12,6 +12,7 @@ class Routes implements \CSY2028\Routes {
 		include __DIR__ . '/../../Connection/pdo.php';
 
         
+        $lectureTable = new \CSY2028\DatabaseTable($pdo, 'lecture', 'lecture_id');
         $staffTable = new \CSY2028\DatabaseTable($pdo, 'staff', 'staff_id');
         $studentsTable = new \CSY2028\DatabaseTable($pdo, 'student', 'student_id');
         $courseTable = new \CSY2028\DatabaseTable($pdo, 'courses', 'course_id');
@@ -22,7 +23,8 @@ class Routes implements \CSY2028\Routes {
         $authentication = new \Classes\Controllers\Authentication($userTable);
         $this->authentication=$authentication;
         
-
+        
+        $lectureController=new \Classes\Controllers\Lecture($courseTable,$moduleTable,$staffTable,$roomTable,$lectureTable);
         $moduleController=new \Classes\Controllers\Module($moduleTable,$courseTable,$staffTable);
         $bookClassController = new \Classes\Controllers\BookClass($roomTable,$reservationTable);
         $courseController = new \Classes\Controllers\Course($courseTable,$staffTable,$moduleTable);
@@ -51,7 +53,7 @@ class Routes implements \CSY2028\Routes {
                     'function' => 'editSubmit'
                 ],
                'loggedin' => true,
-               'access'=>['admin'=>true,'teacher'=>true,'student'=>false]
+               'access'=>['admin'=>true,'teacher'=>true,'student'=>true]
             ],
             'dashboard' => [
                 'GET' => [
@@ -271,7 +273,15 @@ class Routes implements \CSY2028\Routes {
                 ],
                'loggedin' => true,
                'access'=>['admin'=>true,'teacher'=>false,'student'=>false]
-            ],        
+            ],  
+            'module/list' => [
+                'GET' => [
+                    'controller' => $moduleController,
+                    'function' => 'list'
+                ],      
+                'loggedin' => true,
+                'access'=>['admin'=>false,'teacher'=>true,'student'=>false]
+            ],
            'login' => [
                 'GET' => [
                     'controller' => $loginController,
@@ -323,6 +333,26 @@ class Routes implements \CSY2028\Routes {
                 ],
                'loggedin' => true,
                'access'=>['admin'=>true,'teacher'=>true,'student'=>false]
+            ],
+            'lecture/plan' => [
+                'GET' => [
+                    'controller' => $lectureController,
+                    'function' => 'plan'
+                ],
+               'loggedin' => true,
+               'access'=>['admin'=>true,'teacher'=>false,'student'=>false]
+            ],
+            'lecture/plan/edit' => [
+                'GET' => [
+                    'controller' => $lectureController,
+                    'function' => 'editForm'
+                    ],
+                'POST' => [
+                    'controller' => $lectureController,
+                    'function' => 'editSubmit'
+                ],
+               'loggedin' => true,
+               'access'=>['admin'=>true,'teacher'=>false,'student'=>false]
             ],
            ];  
 

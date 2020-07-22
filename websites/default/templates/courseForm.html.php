@@ -4,9 +4,6 @@
 		<label for="name">Course Name</label>
         <input type="text" name="course[name]" value="<?=$course['name'] ?? ''?>" />
 		</br>
-		<!-- <label for="name">Number of Modules</label>
-        <input type="text" name="course[no_of_modules]" value="<?=$course['no_of_modules'] ?? ''?>" />
-		</br> -->
 		<label for="name">Course Duration</label>
         <input type="number"  min="1" max="5" name="course[course_duration]" value="<?=$course['course_duration'] ?? ''?>" />
 		<span>Years</span>
@@ -29,18 +26,6 @@
 		</div>
 		
 		<div class="col-6">
-			<!-- <div id="modules" class="row">
-				<?php
-				
-					foreach ($modules as $module ) {
-						echo'
-							<label class="col-6 ">Module Name</label>
-							<input class="col-6 my-2" type="text" name="module[]" value="'.$module['name'].'"/>
-						';
-					}
-				?>	
-			</div>
-			<button type="button" id="addModBtn" onclick="addInput()" >add Module</button>  -->
 		</div>
 		<input type="submit" value="Submit">
 </form>
