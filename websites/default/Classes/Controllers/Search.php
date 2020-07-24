@@ -74,6 +74,7 @@ class Search  {
   $staffs =$this->matchedStaffs($searchString);
   $results=['courses'=>$courses,'students'=>$students,'staffs'=>$staffs];
 
+
    return[
     'template'=>'searchResult.html.php',
     'title' => 'Result',

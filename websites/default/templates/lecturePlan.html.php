@@ -60,44 +60,5 @@
     
        
      </div>
+     </div>
 
-
-        </div>
-            <!-- <div class=" nav nav-tabs nav-fill flex-column flex-sm-row nav-justified" >
-                <?php
-                    $currentDate=date('Y');
-                    for ($i=0; $i < 4; $i++) { 
-                        $j=$i+1;
-                        echo '<button id="'.date('Y', strtotime('+'.$i.' years')).'" onclick=getMonths() class=" btn nav-item nav-link  yrsBtn m-1 ">
-                        '.date('Y', strtotime('+'.$i.' years')).'-'.date('Y', strtotime('+'.$j.' years')).'
-                        </button>';
-                        ;
-                    }        
-                ?>
-            </div>
-            <ul id="monthsDisplay" class="nav nav-tabs flex-column flex-sm-row my-2"></ul>
-            -->
-
- 
-
-</div>
-<!-- 
-<script >
-
-    function getMonths(){
-        let li='';
-        document.querySelectorAll('.yrsBtn').forEach(btn => {
-            btn.addEventListener('click', function() {       
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            for (let i = 1; i < 11; i++) {
-                var startDate=new Date(this.id, 07+i);
-                li+=`<button class="btn flex-sm-fill text-sm-center nav-link m-1">${startDate.toLocaleDateString('en-GB',options).split(" ").slice(2,4)}</button>`
-            }
-            monthsDisplay.innerHTML=li;
-                })
-        });
- 
-
-    }
-
-</script> -->

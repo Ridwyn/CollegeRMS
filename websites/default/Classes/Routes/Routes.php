@@ -20,10 +20,14 @@ class Routes implements \CSY2028\Routes {
         $roomTable = new \CSY2028\DatabaseTable($pdo, 'room', 'room_id');
         $reservationTable = new \CSY2028\DatabaseTable($pdo, 'reservation', 'reservation_id');
         $userTable = new \CSY2028\DatabaseTable($pdo, 'users', 'user_id');
+
+
         $authentication = new \Classes\Controllers\Authentication($userTable);
         $this->authentication=$authentication;
         
         
+        $registerController=new \Classes\Controllers\Register($lectureTable,$studentsTable,$staffTable,$moduleTable,$roomTable);
+        $timetableController=new \Classes\Controllers\Timetable($staffTable,$studentsTable,$courseTable,$moduleTable,$lectureTable,$roomTable);
         $lectureController=new \Classes\Controllers\Lecture($courseTable,$moduleTable,$staffTable,$roomTable,$lectureTable);
         $moduleController=new \Classes\Controllers\Module($moduleTable,$courseTable,$staffTable);
         $bookClassController = new \Classes\Controllers\BookClass($roomTable,$reservationTable);
@@ -353,6 +357,30 @@ class Routes implements \CSY2028\Routes {
                 ],
                'loggedin' => true,
                'access'=>['admin'=>true,'teacher'=>false,'student'=>false]
+            ],
+            'timetable' => [
+                'GET' => [
+                    'controller' => $timetableController,
+                    'function' => 'view'
+                ],
+               'loggedin' => true,
+               'access'=>['admin'=>true,'teacher'=>true,'student'=>true]
+            ],
+            'register' => [
+                'GET' => [
+                    'controller' => $registerController,
+                    'function' => 'register'
+                ],
+               'loggedin' => true,
+               'access'=>['admin'=>true,'teacher'=>true,'student'=>false]
+            ],
+            'register/lecture' => [
+                'GET' => [
+                    'controller' => $registerController,
+                    'function' => 'registerLecture'
+                ],
+               'loggedin' => true,
+               'access'=>['admin'=>true,'teacher'=>true,'student'=>false]
             ],
            ];  
 

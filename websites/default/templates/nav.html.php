@@ -41,6 +41,10 @@ if(isset($_SESSION['usertype'])){
                     </li><li class="nav-item">
                     <h4><a class="nav-link " href="/bookclass/edit">BookClassroom</a></h4>
                     </li><li class="nav-item">
+                    <h4><a class="nav-link " href="/timetable">Timetable</a></h4>
+                    </li><li class="nav-item">
+                    <h4><a class="nav-link " href="/register">Register</a></h4>
+                    </li><li class="nav-item">
                     <h4><a class="nav-link " href="/checkreservation">Check Reservation</a></h4>
                     </li><li class="nav-item">
                     <h4><a class="nav-link " href="">Attendance Records</a></h4>

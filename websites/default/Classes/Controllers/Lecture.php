@@ -43,7 +43,6 @@ class Lecture {
         }
         
     }
-    // var_dump($lecturesPlan);
     return[
         'template'=>'lecturePlan.html.php',
         'title' => 'Course list',
