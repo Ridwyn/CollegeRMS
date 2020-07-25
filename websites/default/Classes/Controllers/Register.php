@@ -6,19 +6,22 @@ class Register {
  private $staffTable;
  private $moduleTable;
  private $roomTable;
+ private $registerTable;
 
- public function __construct($lectureTable,$studentTable,$staffTable,$moduleTable,$roomTable) {
+ public function __construct($lectureTable,$studentTable,$staffTable,$moduleTable,$roomTable,$registerTable) {
  $this->lectureTable = $lectureTable;
  $this->studentTable = $studentTable;
  $this->staffTable = $staffTable;
  $this->moduleTable = $moduleTable;
  $this->roomTable = $roomTable;
+ $this->registerTable = $registerTable;
  }
 
  public function register(){
 
     $lecturesTimetable=[];
     $size;
+  
 
     if ($_SESSION['usertype']=='teacher') {
         $staff=$this->staffTable->findByID($_SESSION['id'])[0];
@@ -29,16 +32,24 @@ class Register {
             foreach ($lectures as $index => $lecture) {
                 $size=count($lecture);
                 $room=$this->roomTable->findByID($lecture['room_id'])[0];
+               $register= $this->registerTable->findByID($lecture['lecture_id']);
                 $d['module_name']=$module['name'];
                 $d[$size++]=$module['name'];
                 $d['room_number']=$room['room_number'];
                 $d[$size++]=$room['room_number'];
+                if (isset($register[0]['lecture_id'])==$lecture['lecture_id']) {
+                    $d['is_marked']=true;
+                    $d[$size++]=true;
+                }else{
+                    $d['is_marked']=false;
+                    $d[$size++]=false;
+                }
+               
                 $a=$lecture+=$d;
-                $lecturesTimetable[$key]=$a;
+                $lecturesTimetable[$index]=$a;
             }
         }
     }
-
     return[
         'template'=>'register.html.php',
         'title' => '',
@@ -48,24 +59,28 @@ class Register {
 
  }
 
- public function registerLecture(){
+    public function editSubmit (){
+        foreach ($_POST as $key => $register) {
+           if($register['confirm']=='yes'){
+            unset($register['confirm']);
+            $this->registerTable->insert($register);
+           }
+        }
+        return($this->register());
+    }
+
+
+ public function editForm(){
     $students_on_lecture=[];
     $size;
 
     $lecture=$this->lectureTable->findByID($_GET['id'])[0];
     $module=$this->moduleTable->find('module_id',$lecture['module_id'])[0];
     $students=$this->studentTable->find('course_id',$module['course_id']);
-    // var_dump($lecture);
-    // var_dump($students);
 
-        // $staff=$this->staffTable->findByID($_SESSION['id'])[0];
-        // $modules=$this->moduleTable->find('staff_id',$staff['staff_id']);
-        
-    // foreach ($modules as $key => $module) {
-    //         $lectures=$this->lectureTable->find('module_id',$module['module_id']);
             foreach ($students as $index => $student) {
                 $size=count($student);
-                // $room=$this->roomTable->findByID($student['room_id'])[0];
+            
                 $d['module_name']=$module['name'];
                 $d[$size++]=$module['name'];
                 $d['lecture_id']=$lecture['lecture_id'];
@@ -78,11 +93,8 @@ class Register {
                 $students_on_lecture[$index]=$a;
             }
 
-            var_dump($lectures_with_students);
-        // }
-
     return[
-        'template'=>'registerLecture.html.php',
+        'template'=>'registerLectureForm.html.php',
         'title' => '',
         'variables'=>['students_on_lecture'=>$students_on_lecture],
         ];

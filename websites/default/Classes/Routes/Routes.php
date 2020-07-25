@@ -12,6 +12,7 @@ class Routes implements \CSY2028\Routes {
 		include __DIR__ . '/../../Connection/pdo.php';
 
         
+        $registerTable = new \CSY2028\DatabaseTable($pdo, 'register', 'lecture_id');
         $lectureTable = new \CSY2028\DatabaseTable($pdo, 'lecture', 'lecture_id');
         $staffTable = new \CSY2028\DatabaseTable($pdo, 'staff', 'staff_id');
         $studentsTable = new \CSY2028\DatabaseTable($pdo, 'student', 'student_id');
@@ -26,7 +27,7 @@ class Routes implements \CSY2028\Routes {
         $this->authentication=$authentication;
         
         
-        $registerController=new \Classes\Controllers\Register($lectureTable,$studentsTable,$staffTable,$moduleTable,$roomTable);
+        $registerController=new \Classes\Controllers\Register($lectureTable,$studentsTable,$staffTable,$moduleTable,$roomTable,$registerTable);
         $timetableController=new \Classes\Controllers\Timetable($staffTable,$studentsTable,$courseTable,$moduleTable,$lectureTable,$roomTable);
         $lectureController=new \Classes\Controllers\Lecture($courseTable,$moduleTable,$staffTable,$roomTable,$lectureTable);
         $moduleController=new \Classes\Controllers\Module($moduleTable,$courseTable,$staffTable);
@@ -374,10 +375,14 @@ class Routes implements \CSY2028\Routes {
                'loggedin' => true,
                'access'=>['admin'=>true,'teacher'=>true,'student'=>false]
             ],
-            'register/lecture' => [
+            'register/lecture/edit' => [
                 'GET' => [
                     'controller' => $registerController,
-                    'function' => 'registerLecture'
+                    'function' => 'editForm'
+                ],
+                'POST' => [
+                    'controller' => $registerController,
+                    'function' => 'editSubmit'
                 ],
                'loggedin' => true,
                'access'=>['admin'=>true,'teacher'=>true,'student'=>false]
