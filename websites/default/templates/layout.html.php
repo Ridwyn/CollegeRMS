@@ -19,7 +19,7 @@
 	<body>
 			<header class="header  text-white row py-1">
 				<div class="logo col-4" id="logo" style="height:100px">
-					<img src="/images/logo3.jpeg" style="height: -webkit-fill-available;" alt="">
+					<img src="/images/logo3.jpeg" style="height:100%;" class="img-fluid" alt="">
 				</div>
 				<div class="banner col-6" id="banner">
 					<h3 class="font-weight-bolder py-4">Woodlands University College</h3>

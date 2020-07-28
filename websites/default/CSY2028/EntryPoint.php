@@ -44,19 +44,21 @@ class EntryPoint {
            	
 		}
 		
-		// Return to login page
-		if(!isset($routes[$route])){
-			$controller = $routes['login'][$method]['controller'];
-			$functionName = $routes['login'][$method]['function'];
-			$page = $controller->$functionName();
-			$output = $this->loadTemplate('../templates/' . $page['template'], $page['variables']);
-			$title = $page['title'];
-			echo $this->loadTemplate('../templates/layout.html.php', $this->routes->getVarsForLayout($title, $output));
+		// Return to login page 
+		// if(!isset($routes[$route])){
+		// 	$controller = $routes['login'][$method]['controller'];
+		// 	$functionName = $routes['login'][$method]['function'];
+		// 	$page = $controller->$functionName();
+		// 	$page['variables']['error']='Unauthorised Access';
+		// 	$output = $this->loadTemplate('../templates/' . $page['template'], $page['variables']);
+		// 	$title = $page['title'];
+		// 	echo $this->loadTemplate('../templates/layout.html.php', $this->routes->getVarsForLayout($title, $output));
 
-		}
+		// }
 
 		// 
-		if($authentication->isLoggedIn()){
+		if($authentication->isLoggedIn() && array_key_exists($route,$routes)){
+		
 			$controller = $routes[$route][$method]['controller'];
 			$functionName = $routes[$route][$method]['function'];
 			$page = $controller->$functionName();
