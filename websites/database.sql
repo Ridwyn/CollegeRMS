@@ -839,7 +839,7 @@ CREATE TABLE `announcements` (
   `body` text COLLATE utf8mb4_unicode_ci,
   `author` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`announcement_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -848,6 +848,7 @@ CREATE TABLE `announcements` (
 
 LOCK TABLES `announcements` WRITE;
 /*!40000 ALTER TABLE `announcements` DISABLE KEYS */;
+INSERT INTO `announcements` VALUES (2,'Submit your work','     asdasdasdaf','Jane Jones');
 /*!40000 ALTER TABLE `announcements` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -996,7 +997,7 @@ CREATE TABLE `lecture` (
   `staff_id` int(11) DEFAULT NULL,
   `end_date` datetime DEFAULT NULL,
   PRIMARY KEY (`lecture_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1005,7 +1006,7 @@ CREATE TABLE `lecture` (
 
 LOCK TABLES `lecture` WRITE;
 /*!40000 ALTER TABLE `lecture` DISABLE KEYS */;
-INSERT INTO `lecture` VALUES (8,'2020-07-21 00:00:00',2,1,15,'2020-07-21 14:36:00'),(9,'2020-07-20 00:00:00',2,3,15,'2020-07-20 15:58:00'),(10,'2020-07-20 00:00:00',2,1,15,'2020-07-20 00:54:00'),(11,'2020-07-21 00:00:00',2,1,15,'2020-07-22 00:54:00');
+INSERT INTO `lecture` VALUES (8,'2020-07-21 00:00:00',2,1,15,'2020-07-21 14:36:00'),(9,'2020-07-20 00:00:00',2,3,15,'2020-07-20 15:58:00'),(10,'2020-07-20 00:00:00',2,1,15,'2020-07-20 00:54:00'),(11,'2020-07-21 00:00:00',2,1,15,'2020-07-22 00:54:00'),(12,'2020-07-28 23:37:00',3,5,17,'2020-07-28 00:37:00');
 /*!40000 ALTER TABLE `lecture` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1055,7 +1056,7 @@ CREATE TABLE `register` (
 
 LOCK TABLES `register` WRITE;
 /*!40000 ALTER TABLE `register` DISABLE KEYS */;
-INSERT INTO `register` VALUES (11,24),(11,25);
+INSERT INTO `register` VALUES (9,24),(9,25),(11,25);
 /*!40000 ALTER TABLE `register` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1179,7 +1180,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (24,'Micheal','','Scott','0000-00-00','','','','0000-00-00','','0000-00-00',20,'',''),(25,'Rick','','Sancez','0000-00-00','','','','0000-00-00','','0000-00-00',20,'',''),(26,'Morty','','Smith','0000-00-00','','','','0000-00-00','','0000-00-00',21,'','');
+INSERT INTO `student` VALUES (24,'Micheal','','Scott','0000-00-00','','','','0000-00-00','Computing','0000-00-00',20,'',''),(25,'Rick','','Sancez','0000-00-00','','','','0000-00-00','','0000-00-00',20,'',''),(26,'Morty','','Smith','0000-00-00','','','','0000-00-00','','0000-00-00',21,'','');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1253,4 +1254,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-25 14:55:59
+-- Dump completed on 2020-07-30  9:55:07
