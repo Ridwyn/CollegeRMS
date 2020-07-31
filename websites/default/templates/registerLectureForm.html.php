@@ -5,11 +5,13 @@
         <?php
         $studentFormInput='';
 
+
             foreach ($students_on_lecture as $key=> $sl) {
                 $div='
                     <div class="mt-1  d-flex row justify-content-around">
                         <input type="hidden" name="resgister'.$key.'[student_id]" value="'.$sl['student_id'] .'" />
                         <input type="hidden" name="resgister'.$key.'[lecture_id]" value="'.$sl['lecture_id'] .'" />
+                        <input type="hidden" name="resgister'.$key.'[module_id]" value="'.$sl['module_id'] .'" />
                         <label class="flex-fill ">'.$sl['Fname'].' '.$sl['Sname'].'</label>
                         <select class="flex-fill  " name="resgister'.$key.'[confirm]"">
                             <option value="yes" >Yes</option>

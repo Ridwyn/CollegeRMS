@@ -59,6 +59,48 @@ class Register {
 
  }
 
+    public function view(){
+        $register_Details=[];
+        $size;
+        $registers=$this->registerTable->find('lecture_id',$_GET['id']);
+        foreach ($registers as $key => $register) {
+            $student=$this->studentTable->findByID($register['student_id'])[0];
+            $lecture=$this->lectureTable->findByID($register['lecture_id'])[0];
+            $module=$this->moduleTable->findByID($lecture['module_id'])[0];
+
+            $size=count($student);
+            $d['module_name']=$module['name'];
+            $d[$size++]=$module['name'];
+            $d['student_name']=$student['Fname'] .' '.$student['Sname'];
+            $d[$size++]=$student['Fname'] .' '.$student['Sname'];
+
+            $a=$student+=$d;
+            $register_Details[$key]=$a;
+
+            // $students=$this->studentTable->find('course_id',$module['course_id']);
+            // foreach ($students as $index => $student) {
+              
+            //     if ($student['student_id']==$register['student_id']) {
+            //         $d['is_present']=true;
+            //         $d[$size++]=true;
+            //     }else{
+            //         $d['is_present']=false;
+            //         $d[$size++]=false; 
+            //     }
+
+               
+            // }
+                                 
+        }
+
+
+        return[
+            'template'=>'registerView.html.php',
+            'title' => 'Register View',
+            'variables'=>['register_Details'=>$register_Details],
+            ];
+    }
+
     public function editSubmit (){
         foreach ($_POST as $key => $register) {
            if($register['confirm']=='yes'){
@@ -83,6 +125,8 @@ class Register {
             
                 $d['module_name']=$module['name'];
                 $d[$size++]=$module['name'];
+                $d['module_id']=$module['module_id'];
+                $d[$size++]=$module['module_id'];
                 $d['lecture_id']=$lecture['lecture_id'];
                 $d[$size++]=$lecture['lecture_id'];
                 $d['lecture_start_date']=$lecture['start_date'];

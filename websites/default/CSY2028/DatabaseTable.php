@@ -18,6 +18,15 @@ class DatabaseTable {
     $stmt->execute($criteria);
     return $stmt->fetchAll();
     }
+    public function findMultiple($field, $value,$field0,$value0) {
+    $stmt = $this->pdo->prepare('SELECT * FROM ' . $this->table . ' WHERE ' . $field . ' = :value AND '.$field0.' =:value0');
+    $criteria = [
+    'value' => $value,
+    'value0' => $value0
+    ];
+    $stmt->execute($criteria);
+    return $stmt->fetchAll();
+    }
     public function findByID($value) {
     $stmt = $this->pdo->prepare('SELECT * FROM ' . $this->table . ' WHERE ' . $this->primaryKey . ' = :value');
     $criteria = [

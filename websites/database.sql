@@ -1046,6 +1046,7 @@ DROP TABLE IF EXISTS `register`;
 CREATE TABLE `register` (
   `lecture_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
+  `module_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`lecture_id`,`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1056,7 +1057,7 @@ CREATE TABLE `register` (
 
 LOCK TABLES `register` WRITE;
 /*!40000 ALTER TABLE `register` DISABLE KEYS */;
-INSERT INTO `register` VALUES (9,24),(9,25),(11,25);
+INSERT INTO `register` VALUES (9,24,3),(9,25,3),(10,25,1),(11,25,1);
 /*!40000 ALTER TABLE `register` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1171,7 +1172,7 @@ CREATE TABLE `student` (
   `street` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   `city` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`student_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1180,7 +1181,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (24,'Micheal','','Scott','0000-00-00','','','','0000-00-00','Computing','0000-00-00',20,'',''),(25,'Rick','','Sancez','0000-00-00','','','','0000-00-00','','0000-00-00',20,'',''),(26,'Morty','','Smith','0000-00-00','','','','0000-00-00','','0000-00-00',21,'','');
+INSERT INTO `student` VALUES (24,'Micheal','','Scott','0000-00-00','','','','0000-00-00','Computing','0000-00-00',20,'',''),(25,'Rick','','Sancez','0000-00-00','','','','0000-00-00','','0000-00-00',20,'',''),(26,'Morty','','Smith','0000-00-00','','','','0000-00-00','','0000-00-00',21,'',''),(27,'dame','','dillian','2000-11-30','','','','2020-07-16','Computing','0000-00-00',20,'','');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1232,7 +1233,7 @@ CREATE TABLE `users` (
   `password` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_type` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1241,7 +1242,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (10,'14-admin','admin','admin'),(11,'15-teacher','teacher','teacher'),(12,'24-student','student','student'),(13,'16-teacher','wYO6P','teacher'),(14,'25-student','NTLVy','student'),(15,'26-student','ma66K','student'),(16,'17-teacher','AmhQ2','teacher'),(17,'18-admin','bOzBw','admin'),(18,'18-teacher','sz4z7','teacher');
+INSERT INTO `users` VALUES (10,'14-admin','admin','admin'),(11,'15-teacher','teacher','teacher'),(12,'24-student','student','student'),(13,'16-teacher','wYO6P','teacher'),(14,'25-student','student','student'),(15,'26-student','ma66K','student'),(16,'17-teacher','AmhQ2','teacher'),(17,'18-admin','bOzBw','admin'),(18,'18-teacher','sz4z7','teacher'),(19,'27-student','LQLFD','student');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1254,4 +1255,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-30  9:55:07
+-- Dump completed on 2020-07-31 11:13:30

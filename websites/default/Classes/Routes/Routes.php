@@ -27,6 +27,7 @@ class Routes implements \CSY2028\Routes {
         $this->authentication=$authentication;
         
         
+        $attendanceController=new \Classes\Controllers\Attendance($lectureTable,$studentsTable,$moduleTable,$registerTable);
         $registerController=new \Classes\Controllers\Register($lectureTable,$studentsTable,$staffTable,$moduleTable,$roomTable,$registerTable);
         $timetableController=new \Classes\Controllers\Timetable($staffTable,$studentsTable,$courseTable,$moduleTable,$lectureTable,$roomTable);
         $lectureController=new \Classes\Controllers\Lecture($courseTable,$moduleTable,$staffTable,$roomTable,$lectureTable);
@@ -375,6 +376,14 @@ class Routes implements \CSY2028\Routes {
                'loggedin' => true,
                'access'=>['admin'=>true,'teacher'=>true,'student'=>false]
             ],
+            'register/view' => [
+                'GET' => [
+                    'controller' => $registerController,
+                    'function' => 'view'
+                ],
+               'loggedin' => true,
+               'access'=>['admin'=>true,'teacher'=>true,'student'=>false]
+            ],
             'register/lecture/edit' => [
                 'GET' => [
                     'controller' => $registerController,
@@ -386,6 +395,14 @@ class Routes implements \CSY2028\Routes {
                 ],
                'loggedin' => true,
                'access'=>['admin'=>true,'teacher'=>true,'student'=>false]
+            ],
+            'attendance' => [
+                'GET' => [
+                    'controller' => $attendanceController,
+                    'function' => 'view'
+                ],
+               'loggedin' => true,
+               'access'=>['admin'=>true,'teacher'=>true,'student'=>true]
             ],
            ];  
 

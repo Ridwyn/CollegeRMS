@@ -16,7 +16,7 @@
         
 
             foreach ($lecturesTimetable as $key=> $lecture) {
-                $markRegisterLink='<td>Register Taken</td>';
+                $markRegisterLink='<td><a href="/register/view?id='.$lecture['lecture_id'].'">View</a></td>';
                 if($lecture['is_marked']!=true){
                     $markRegisterLink=  '<td><a href="/register/lecture/edit?id='.$lecture['lecture_id'].'" class="btn btn-secondary">Mark &#10004;</a></td>';
 

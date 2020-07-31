@@ -8,20 +8,16 @@
               <th scope="col">Percentage</th>
             </tr>
           </thead>
-          <tbody>   
-          <tr>         
-                <?php
-                    foreach($modules as $module){
-                        echo '<th scope="row">'.$module['name'].'</th>';
-                    }
-                ?>
-            <td>
-            <?php
-                foreach($attendance as $attendance ){
-                    echo '<td>'.$attendance['percentage'] .'</td>';
+          <tbody>         
+           <?php
+                foreach ($modules_with_Attendance as $key => $module) {
+                  echo'<tr>
+                  <td>'.$module['name'].'</td>
+                  <td>'.$module['attendance'].'%</td>
+                  </tr>
+                  ';
                 }
-                ?>
-            </tr>
+           ?>
           </tbody>
         </table>
 </div>
