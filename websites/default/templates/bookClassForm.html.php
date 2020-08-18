@@ -14,6 +14,11 @@
               name="reservation[reservation_id]"
               value="<?=$reservation['reservation_id'] ?? ''?>" 
             />
+        <input
+              type="hidden"
+              name="reservation[username]"
+              value="<?=$_SESSION['username'] ?? ''?>" 
+            />
             <label><b>Start Date</b></label>
             <input
               type="datetime-local"

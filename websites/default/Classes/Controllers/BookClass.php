@@ -18,6 +18,29 @@ class BookClass {
 //         'variables'=>['courses'=>$courses],
 //         ];
 //  }
+
+public function myReservations(){
+    $reservations=[];
+    $rooms = $this->roomTable->findAll();
+    $reservations_withoutName=  $this->reservationTable->find('username',$_SESSION['username']);
+
+    //    NOTE MATCH THE RESERVATION TO GET ROOM NAME AND LOCATION
+    foreach ($reservations_withoutName as $reservation) {
+        foreach ($rooms as $room) {
+            if ($reservation['room_id'] == $room['room_id']) {
+                $result=array_merge($reservation,$room);
+              array_push($reservations,$result);
+            }
+        }       
+    }
+
+    return[
+        'template'=>'checkreservation.html.php',
+        'title' => 'Reservation',
+        'variables'=>['reservations'=>$reservations],
+        ];
+}
+
  public function checkreservation(){
    $rooms = $this->roomTable->findAll();
    $reservations_withoutName = $this->reservationTable->findAll();
@@ -69,6 +92,7 @@ class BookClass {
    $reservation = $_POST['reservation'];
   
    $room_id=$reservation['room_id'];
+
 
    $rooms = $this->roomTable->findAll();
   $bol= $this->isreserved($reservation);

@@ -39,11 +39,9 @@ if(isset($_SESSION['usertype'])){
                     </li><li class="nav-item">
                     <h4><a class="nav-link " href="/module/list">Modules</a></h4>
                     </li><li class="nav-item">
+                    <h4><a class="nav-link " href="/assignment/list">Assignments</a></h4>
+                    </li><li class="nav-item">
                     <h4><a class="nav-link " href="/bookclass/edit">BookClassroom</a></h4>
-                    </li><li class="nav-item">
-                    <h4><a class="nav-link " href="/timetable">Timetable</a></h4>
-                    </li><li class="nav-item">
-                    <h4><a class="nav-link " href="/register">Register</a></h4>
                     </li><li class="nav-item">
                     <h4><a class="nav-link " href="/checkreservation">Check Reservation</a></h4>
                     </li><li class="nav-item">
@@ -68,7 +66,7 @@ if(isset($_SESSION['usertype'])){
                 </li><li class="nav-item">
                 <h4><a class="nav-link " href="/student?id='.$_SESSION['id'].'">Profile</a></h4>
                 </li><li class="nav-item">
-                <h4><a class="nav-link " href="/grades">Grades</a></h4>
+                <h4><a class="nav-link " href="/module/list">Modules</a></h4>
                 </li><li class="nav-item">
                 <h4><a class="nav-link " href="/timetable">Timetable</a></h4>
                 </li><li class="nav-item">

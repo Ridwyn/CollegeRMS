@@ -11,7 +11,7 @@ class Routes implements \CSY2028\Routes {
 	public function getRoutes(): array  {
 		include __DIR__ . '/../../Connection/pdo.php';
 
-        
+        $assignmentTable = new \CSY2028\DatabaseTable($pdo, 'assignment', 'assignment_id');   
         $registerTable = new \CSY2028\DatabaseTable($pdo, 'register', 'lecture_id');
         $lectureTable = new \CSY2028\DatabaseTable($pdo, 'lecture', 'lecture_id');
         $staffTable = new \CSY2028\DatabaseTable($pdo, 'staff', 'staff_id');
@@ -21,12 +21,17 @@ class Routes implements \CSY2028\Routes {
         $roomTable = new \CSY2028\DatabaseTable($pdo, 'room', 'room_id');
         $reservationTable = new \CSY2028\DatabaseTable($pdo, 'reservation', 'reservation_id');
         $userTable = new \CSY2028\DatabaseTable($pdo, 'users', 'user_id');
+        $gradeTable = new \CSY2028\DatabaseTable($pdo, 'grade', 'student_id');
 
 
         $authentication = new \Classes\Controllers\Authentication($userTable);
         $this->authentication=$authentication;
         
-        
+        // WEBSITE
+        $websiteController=new \Classes\Controllers\Website();
+
+
+        // RMS
         $attendanceController=new \Classes\Controllers\Attendance($lectureTable,$studentsTable,$moduleTable,$registerTable);
         $registerController=new \Classes\Controllers\Register($lectureTable,$studentsTable,$staffTable,$moduleTable,$roomTable,$registerTable);
         $timetableController=new \Classes\Controllers\Timetable($staffTable,$studentsTable,$courseTable,$moduleTable,$lectureTable,$roomTable);
@@ -39,20 +44,75 @@ class Routes implements \CSY2028\Routes {
         $studentController = new \Classes\Controllers\Student($studentsTable, $userTable, $courseTable);
         $dashboardController = new \Classes\Controllers\Dashboard($courseTable,$studentsTable,$roomTable);
         $searchController = new \Classes\Controllers\Search($courseTable,$studentsTable,$staffTable);
-        $loginController = new \Classes\Controllers\Login($authentication);
+        $loginController = new \Classes\Controllers\Login($authentication,$userTable);
+        $assignmentController = new \Classes\Controllers\Assignment($assignmentTable, $staffTable, $moduleTable);
+        $gradeController = new \Classes\Controllers\Grade($gradeTable, $staffTable, $studentsTable, $assignmentTable, $moduleTable);
+
+
 
         $announcementTable = new \CSY2028\DatabaseTable($pdo, 'announcements', 'announcement_id');     
         $announcementController = new \Classes\Controllers\Announcement($announcementTable, $staffTable);
 
          $routes= [
-            '' => [
-                'GET' => [
-                    'controller' => $dashboardController,
-                    'function' => 'home'
+            'website' => [
+                '' => [
+                    'GET' => [
+                        'controller' => $websiteController,
+                        'function' => 'home'
+                    ],
+                   'loggedin' => true,
+                   'access'=>['admin'=>true,'teacher'=>false,'student'=>false]
                 ],
-               'loggedin' => true,
-               'access'=>['admin'=>true,'teacher'=>false,'student'=>false]
+                'home' => [
+                    'GET' => [
+                        'controller' => $websiteController,
+                        'function' => 'home'
+                    ],
+                   'loggedin' => true,
+                   'access'=>['admin'=>true,'teacher'=>false,'student'=>false]
+                ],
+                'about'=>[
+                    'GET' => [
+                        'controller' => $websiteController,
+                        'function' => 'about'
+                    ],
+                   'loggedin' => true,
+                   'access'=>['admin'=>true,'teacher'=>false,'student'=>false]
+                ],
+                'international'=>[
+                    'GET' => [
+                        'controller' => $websiteController,
+                        'function' => 'international'
+                    ],
+                   'loggedin' => true,
+                   'access'=>['admin'=>true,'teacher'=>false,'student'=>false]
+                ],
+                'postgraduate'=>[
+                    'GET' => [
+                        'controller' => $websiteController,
+                        'function' => 'postgraduate'
+                    ],
+                   'loggedin' => true,
+                   'access'=>['admin'=>true,'teacher'=>false,'student'=>false]
+                ],
+                'student_life'=>[
+                    'GET' => [
+                        'controller' => $websiteController,
+                        'function' => 'student_life'
+                    ],
+                   'loggedin' => true,
+                   'access'=>['admin'=>true,'teacher'=>false,'student'=>false]
+                ],
+                'undergraduate'=>[
+                    'GET' => [
+                        'controller' => $websiteController,
+                        'function' => 'undergraduate'
+                    ],
+                   'loggedin' => true,
+                   'access'=>['admin'=>true,'teacher'=>false,'student'=>false]
+                ]
             ],
+           'rms' =>[
             'search' => [
                 'POST' => [
                     'controller' => $searchController,
@@ -404,6 +464,61 @@ class Routes implements \CSY2028\Routes {
                'loggedin' => true,
                'access'=>['admin'=>true,'teacher'=>true,'student'=>true]
             ],
+            'password/reset' => [
+                'POST' => [
+                    'controller' => $loginController,
+                    'function' => 'passwordReset'
+                ],
+               'loggedin' => true,
+               'access'=>['admin'=>true,'teacher'=>true,'student'=>true]
+            ],
+            'assignment/list' => [
+                'GET' => [
+                    'controller' => $assignmentController,
+                    'function' => 'list'
+                ],
+               'loggedin' => true,
+               'access'=>['admin'=>true,'teacher'=>true,'student'=>true]
+            ],
+            'assignment/delete' => [
+                'GET' => [
+                    'controller' => $assignmentController,
+                    'function' => 'delete'
+                ],
+               'loggedin' => true,
+               'access'=>['admin'=>true,'teacher'=>true,'student'=>false]
+            ],        
+            'assignment/edit' => [
+                'GET' => [
+                'controller' => $assignmentController,
+                'function' => 'editForm'
+                ],
+                'POST' => [
+                'controller' => $assignmentController,
+                'function' => 'editSubmit'
+                ],
+               'loggedin' => true,
+               'access'=>['admin'=>true,'teacher'=>true,'student'=>false]
+            ],
+            'grade/edit' => [
+                'GET' => [
+                'controller' => $gradeController,
+                'function' => 'editForm'
+                ],
+                'POST' => [
+                'controller' => $gradeController,
+                'function' => 'editSubmit'
+                ],
+               'loggedin' => true,
+               'access'=>['admin'=>true,'teacher'=>true,'student'=>false]
+            ],
+            'unauthorised' => [
+                'GET' => [
+                    'controller' => $loginController,
+                    'function' => 'unauthorised'
+                    ],
+            ],
+           ]
            ];  
 
        
@@ -422,6 +537,7 @@ class Routes implements \CSY2028\Routes {
         return [
             'title' => $title,
             'output' => $output,
+            "mainClass" =>$mainClass='college',
            'loggedIn' => $loggedIn
         ];
     }
